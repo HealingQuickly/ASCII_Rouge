@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Player.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -22,7 +23,9 @@ public:
 	void setTile(int x, int y, char tile);
 private:
 	void processPlayerMove(Player &player, int targetX, int targetY);
+	void battleEnemy(Player &player, int targetX, int targetY);
 
 	vector<string> _levelData;
+	vector<Enemy> _enemies;
 };
 
