@@ -93,6 +93,35 @@ void Level::canMovePlayer(char input, Player &player){
 	}
 }
 
+void Level::updateEnemies(Player &player){
+	char AIMove;
+	int playerX, playerY;
+	player.getPosition(playerX, playerY);
+	int enemyX, enemyY;
+	for (int i = 0; i < _enemies.size(); i++){
+		AIMove = _enemies[i].getMove(playerX, playerY);
+		_enemies[i].getPosition(enemyX, enemyY);
+		switch (AIMove){
+		case 'w':
+			// UP
+			processEnemyMove(player, i, enemyX, enemyY - 1);
+			break;
+		case 's':
+			// DOWN
+			processEnemyMove(player, i, enemyX, enemyY + 1);
+			break;
+		case 'a':
+			// LEFT
+			processEnemyMove(player, i, enemyX - 1, enemyY);
+			break;
+		case 'd':
+			// RIGHT
+			processEnemyMove(player, i, enemyX + 1, enemyY);
+			break;
+		}
+	}
+}
+
 char Level::getTile(int x, int y){
 	return _levelData[y][x];
 }
@@ -120,6 +149,26 @@ void Level::processPlayerMove(Player &player, int targetX, int targetY){
 	}
 }
 
+void Level::processEnemyMove(Player &player, int enemyIndex, int targetX, int targetY){
+	int playerX, playerY;
+	int enemyX, enemyY;
+	_enemies[enemyIndex].getPosition(enemyX, enemyY);
+	player.getPosition(playerX, playerY);
+	char targetTile = getTile(targetX, targetY);
+
+	switch (targetTile){
+	case '.':
+		_enemies[enemyIndex].setPosition(targetX, targetY);
+		setTile(enemyX, enemyY, '.');
+		setTile(targetX, targetY, _enemies[enemyIndex].getTile());
+		break;
+	case '#':
+		break;
+	default:
+		break;
+	}
+}
+
 void Level::battleEnemy(Player &player, int targetX, int targetY){
 	int enemyX, enemyY;
 	int playerX, playerY;
@@ -140,6 +189,11 @@ void Level::battleEnemy(Player &player, int targetX, int targetY){
 				setTile(targetX, targetY, '.');
 				print();
 				printf("Enemy died\n");
+				//remove enemy after it died
+				_enemies[i] = _enemies.back();
+				_enemies.pop_back();
+				i--;
+				system("PAUSE");
 				player.addExp(attackResult);
 
 				return;

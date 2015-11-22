@@ -13,9 +13,13 @@ public:
 	//getter
 	void getPosition(int &x, int &y);
 	string getName();
+	char getTile();
 
 	int attack();
 	int takeDamage(int attack); // attack is the chance range from 0 to player's max attack value
+
+	//gets AI move command
+	char getMove(int playerX, int playerY);
 private:
 	string _name;
 	char _tile;

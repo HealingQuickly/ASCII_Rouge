@@ -16,6 +16,7 @@ public:
 	void load(string fileName, Player &player);
 	void print();
 	void canMovePlayer(char input, Player &player);
+	void updateEnemies(Player &player);
 
 	//getter
 	char getTile(int x, int y);
@@ -23,6 +24,7 @@ public:
 	void setTile(int x, int y, char tile);
 private:
 	void processPlayerMove(Player &player, int targetX, int targetY);
+	void processEnemyMove(Player &player, int enemyIndex, int targetX, int targetY);
 	void battleEnemy(Player &player, int targetX, int targetY);
 
 	vector<string> _levelData;
