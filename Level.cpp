@@ -162,7 +162,8 @@ void Level::processEnemyMove(Player &player, int enemyIndex, int targetX, int ta
 		setTile(enemyX, enemyY, '.');
 		setTile(targetX, targetY, _enemies[enemyIndex].getTile());
 		break;
-	case '#':
+	case 'P':
+		battleEnemy(player, enemyX, enemyY);
 		break;
 	default:
 		break;
