@@ -35,7 +35,7 @@ int Player::takeDamage(int attack){
 			return 1;
 		}
 	}
-	return 0; // didn't die, return 1 if did die
+	return 0; // didn't die; return 1 if did die
 }
 
 void Player::setPosition(int x, int y){

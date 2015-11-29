@@ -63,7 +63,6 @@ void Level::canMovePlayer(char input, Player &player){
 	int playerX;
 	int playerY;
 	player.getPosition(playerX, playerY);
-	char targetTile;
 
 	switch (input){
 	case 'w':
@@ -177,7 +176,7 @@ void Level::battleEnemy(Player &player, int targetX, int targetY){
 	int attackRoll;
 	int attackResult;
 	string enemyName;
-	// loop through the enemies see which one is in the right position
+	// loop through the enemies see which one is in the battle position
 	for (int i = 0; i < _enemies.size(); i++){
 		_enemies[i].getPosition(enemyX, enemyY);
 		enemyName = _enemies[i].getName();

@@ -8,8 +8,6 @@ GameSystem::GameSystem(string levelFile)
 {
 	_player.init(1, 100, 10, 10, 0);
 	_level.load(levelFile, _player);
-
-	system("PAUSE");
 }
 
 void GameSystem::playGame(){
